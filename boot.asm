@@ -2,25 +2,16 @@
 ; A simple boot sector programer
 ;
 
-mov ah, 0x0e
+[org 0x7c00]
+ 	mov bx, HELLO_WORLD
+	call print_string_bx
 
-mov al, 'H'
-int 0x10
+	jmp $ 
 
-mov al, 'e'
-int 0x10
+%include "print_string_bx.asm"
 
-mov al, 'l'
-int 0x10
-
-mov al, 'l'
-int 0x10
-
-mov al, 'o'
-int 0x10 
-;loop:
-	
-	;jmp loop
+HELLO_WORLD:
+	db 'Hello, world!', 0
 
 times 510-($-$$) db 0
 
